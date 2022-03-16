@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/3_strength_and_discipline.mp3</SourceFile>
+  <SourceTime>2019-03-23T16:21:59.34+09:00</SourceTime>
+  <DestFile>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/bin/Windows/3_strength_and_discipline.xnb</DestFile>
+  <DestTime>2019-10-30T10:15:26.8905648+09:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-12-09T01:35:54+09:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-12-09T01:35:54+09:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/bin/Windows/3_strength_and_discipline.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

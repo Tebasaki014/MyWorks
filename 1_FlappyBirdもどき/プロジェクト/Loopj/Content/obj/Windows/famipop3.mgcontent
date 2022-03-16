@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/famipop3.mp3</SourceFile>
+  <SourceTime>2019-09-12T09:49:24.1027645+09:00</SourceTime>
+  <DestFile>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/bin/Windows/famipop3.xnb</DestFile>
+  <DestTime>2019-10-30T10:15:28.5246215+09:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-12-09T01:35:54+09:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-12-09T01:35:54+09:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>D:/User/takosin92fs/Desktop/Loopj/Loopj/Content/bin/Windows/famipop3.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

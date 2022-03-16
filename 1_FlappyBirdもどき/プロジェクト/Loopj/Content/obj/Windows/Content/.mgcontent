@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/3_strength_and_discipline.mp3</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/beer.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/cyclone.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/famipop3.mp3</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/fire.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/fufuiki.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/fufukao.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/kabe.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/kami.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/kusa.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/Leaf.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/mozamito.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/paplane.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/sake.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/shi.png</File>
+    <File>D:/Projects/VisualStudio/Project/MonoGame/Loopj/Loopj/Content/title.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
