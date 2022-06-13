@@ -112,12 +112,15 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXApp;$(SolutionDir)DirectXTex</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,6 +139,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXApp;$(SolutionDir)DirectXTex</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,66 +152,78 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Dx12App.cpp" />
-    <ClCompile Include="Easings.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="FrameRate.cpp" />
-    <ClCompile Include="Gage.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Light.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Object3D.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Quaternion.cpp" />
-    <ClCompile Include="SceneViewer.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="Vector2.cpp" />
-    <ClCompile Include="Vector3.cpp" />
-    <ClCompile Include="WatashiEngine.cpp" />
-    <ClCompile Include="WinApp.cpp" />
+    <ClCompile Include="DirectXApp\Actor.cpp" />
+    <ClCompile Include="DirectXApp\Audio.cpp" />
+    <ClCompile Include="DirectXApp\Bullet.cpp" />
+    <ClCompile Include="DirectXApp\Camera.cpp" />
+    <ClCompile Include="DirectXApp\ClearScene.cpp" />
+    <ClCompile Include="DirectXApp\Collision.cpp" />
+    <ClCompile Include="DirectXApp\DefaultScene.cpp" />
+    <ClCompile Include="DirectXApp\Dx12App.cpp" />
+    <ClCompile Include="DirectXApp\Easings.cpp" />
+    <ClCompile Include="DirectXApp\Enemy.cpp" />
+    <ClCompile Include="DirectXApp\FrameRate.cpp" />
+    <ClCompile Include="DirectXApp\Gage.cpp" />
+    <ClCompile Include="DirectXApp\Input.cpp" />
+    <ClCompile Include="DirectXApp\Light.cpp" />
+    <ClCompile Include="DirectXApp\main.cpp" />
+    <ClCompile Include="DirectXApp\Material.cpp" />
+    <ClCompile Include="DirectXApp\Mesh.cpp" />
+    <ClCompile Include="DirectXApp\Model.cpp" />
+    <ClCompile Include="DirectXApp\Object3D.cpp" />
+    <ClCompile Include="DirectXApp\OverScene.cpp" />
+    <ClCompile Include="DirectXApp\ParticleManager.cpp" />
+    <ClCompile Include="DirectXApp\Player.cpp" />
+    <ClCompile Include="DirectXApp\Quaternion.cpp" />
+    <ClCompile Include="DirectXApp\Scene.cpp" />
+    <ClCompile Include="DirectXApp\SceneViewer.cpp" />
+    <ClCompile Include="DirectXApp\Shader.cpp" />
+    <ClCompile Include="DirectXApp\Sprite.cpp" />
+    <ClCompile Include="DirectXApp\Timer.cpp" />
+    <ClCompile Include="DirectXApp\TitleScene.cpp" />
+    <ClCompile Include="DirectXApp\Vector2.cpp" />
+    <ClCompile Include="DirectXApp\Vector3.cpp" />
+    <ClCompile Include="DirectXApp\WatashiEngine.cpp" />
+    <ClCompile Include="DirectXApp\WinApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="CommonData.h" />
-    <ClInclude Include="Dx12App.h" />
-    <ClInclude Include="Easings.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="FrameRate.h" />
-    <ClInclude Include="Gage.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Object3D.h" />
-    <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Primitive.h" />
-    <ClInclude Include="Quaternion.h" />
-    <ClInclude Include="SceneViewer.h" />
-    <ClInclude Include="SDelete.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="Vector2.h" />
-    <ClInclude Include="Vector3.h" />
-    <ClInclude Include="WatashiEngine.h" />
-    <ClInclude Include="WinApp.h" />
+    <ClInclude Include="DirectXApp\Actor.h" />
+    <ClInclude Include="DirectXApp\Audio.h" />
+    <ClInclude Include="DirectXApp\Bullet.h" />
+    <ClInclude Include="DirectXApp\Camera.h" />
+    <ClInclude Include="DirectXApp\ClearScene.h" />
+    <ClInclude Include="DirectXApp\Collision.h" />
+    <ClInclude Include="DirectXApp\CommonData.h" />
+    <ClInclude Include="DirectXApp\DefaultScene.h" />
+    <ClInclude Include="DirectXApp\Dx12App.h" />
+    <ClInclude Include="DirectXApp\Easings.h" />
+    <ClInclude Include="DirectXApp\Enemy.h" />
+    <ClInclude Include="DirectXApp\FrameRate.h" />
+    <ClInclude Include="DirectXApp\Gage.h" />
+    <ClInclude Include="DirectXApp\Input.h" />
+    <ClInclude Include="DirectXApp\Light.h" />
+    <ClInclude Include="DirectXApp\Material.h" />
+    <ClInclude Include="DirectXApp\Mesh.h" />
+    <ClInclude Include="DirectXApp\Model.h" />
+    <ClInclude Include="DirectXApp\Object3D.h" />
+    <ClInclude Include="DirectXApp\OverScene.h" />
+    <ClInclude Include="DirectXApp\ParticleManager.h" />
+    <ClInclude Include="DirectXApp\Player.h" />
+    <ClInclude Include="DirectXApp\Primitive.h" />
+    <ClInclude Include="DirectXApp\Quaternion.h" />
+    <ClInclude Include="DirectXApp\Scene.h" />
+    <ClInclude Include="DirectXApp\SceneViewer.h" />
+    <ClInclude Include="DirectXApp\SDelete.h" />
+    <ClInclude Include="DirectXApp\Shader.h" />
+    <ClInclude Include="DirectXApp\Singleton.h" />
+    <ClInclude Include="DirectXApp\Sprite.h" />
+    <ClInclude Include="DirectXApp\Timer.h" />
+    <ClInclude Include="DirectXApp\TitleScene.h" />
+    <ClInclude Include="DirectXApp\Vector2.h" />
+    <ClInclude Include="DirectXApp\Vector3.h" />
+    <ClInclude Include="DirectXApp\WatashiEngine.h" />
+    <ClInclude Include="DirectXApp\WinApp.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
