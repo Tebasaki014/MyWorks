@@ -2,6 +2,9 @@
 #include <fstream>
 #include <cassert>
 
+#include "SDelete.h"
+
+
 #pragma comment(lib,"xaudio2.lib")
 
 bool Audio::Initialize()
@@ -25,82 +28,113 @@ bool Audio::Initialize()
 	return true;
 }
 
-bool Audio::LordSound(Sound* sound, const char* filename)
+Sound* Audio::LoadWave(const char* filename)
 {
+	HRESULT result;
 	//ファイルストリーム
 	std::ifstream file;
-	//Waveファイルを開く
+	//開く
 	file.open(filename, std::ios_base::binary);
-	//ファイルオープン失敗をチェック
+	//失敗をチェック
 	if (file.fail()) {
 		assert(0);
 	}
 
-	//RIFFヘッダーの読み込み
+	//RIFFヘッダー読み込み
 	RiffHeader riff;
 	file.read((char*)&riff, sizeof(riff));
-	//ファイルがRIFFかチェック
+	//RIFFならOK
 	if (strncmp(riff.chunk.id, "RIFF", 4) != 0) {
 		assert(0);
 	}
 
-	//Formatチャンクの読み込み
+	//Formatチャンク読み込み
 	FormatChunk format;
 	file.read((char*)&format, sizeof(format));
 
-	//Dataチャンクの読み込み
+	//Dataチャンク読み込み
 	Chunk data;
 	file.read((char*)&data, sizeof(data));
 
-	//Dataチャンクのデータ部（波形データ）の読み込み
-	file.read(sound->pBuffer, data.size);
+	//Dataチャンクのデータ部読み込み
+	char* pBuff = new char[data.size];
+	file.read(pBuff, data.size);
 
-	//Waveファイルを閉じる
+	//ファイル閉じる
 	file.close();
 
-	//波形フォーマットの設定
-	memcpy(&sound->wfex, &format.fmt, sizeof(format.fmt));
-	sound->wfex.wBitsPerSample = format.fmt.nBlockAlign * 8 / format.fmt.nChannels;
+	//Sound* sound = new Sound();
+	//sound->pBuffer = pBuff;
+	//sound->size = data.size;
 
-	sound->size = data.size;
-	return false;
+	//波形フォーマット設定
+	WAVEFORMATEX wfex{};
+	memcpy(&wfex, &format.fmt, sizeof(format.fmt));
+	wfex.wBitsPerSample = format.fmt.nBlockAlign * 8 / format.fmt.nChannels;
+
+	//波形データ設定
+	XAUDIO2_BUFFER buf{};
+	buf.pAudioData = (BYTE*)pBuff;
+	buf.pContext = pBuff;
+	buf.Flags = XAUDIO2_END_OF_STREAM;
+	buf.AudioBytes = data.size;
+
+	Sound* sound = new Sound();
+	sound->buf = buf;
+	sound->wfex = wfex;
+
+	return sound;
 }
 
-void Audio::PlayWave(Sound* sound)
+void Audio::PlayWave(Sound* sound, bool loopFlag)
 {
 	HRESULT result;
-	
-	//ぬるちぇっく
-	if (!sound) return;
 
-	//波形フォーマットを元にSourceVoiceの生成
-	IXAudio2SourceVoice* pSourceVoice = nullptr;
-	result = xAudio2->CreateSourceVoice(&pSourceVoice, &sound->wfex, 0, 2.0f, &voiceCallback);
+	if (loopFlag) {
+		sound->buf.LoopCount = XAUDIO2_LOOP_INFINITE;
+	}
+
+	//SourceVoicceが既に生成されている場合は消す
+	if (sound->pSource) {
+		sound->pSource->DestroyVoice();
+	}
+	//波形フォーマットからSourceVoice生成
+	result = xAudio2->CreateSourceVoice(&sound->pSource, &sound->wfex, 0, 2.0f, &voiceCallback);
 	if FAILED(result) {
-		delete[] sound->pBuffer;
+		SDelete(sound);
 		assert(0);
 		return;
 	}
 
-	//再生する波形データの設定
-	XAUDIO2_BUFFER buf{};
-	buf.pAudioData = (BYTE*)sound->pBuffer;
-	buf.pContext = sound->pBuffer;
-	buf.Flags = XAUDIO2_END_OF_STREAM;
-	buf.AudioBytes = sound->size;
-
-	//波形データの再生
-	result = pSourceVoice->SubmitSourceBuffer(&buf);
+	//波形データ再生
+	result = sound->pSource->SubmitSourceBuffer(&sound->buf);
 	if FAILED(result) {
-		delete[] sound->pBuffer;
+		SDelete(sound);
+		assert(0);
+		return ;
+	}
+
+	result = sound->pSource->Start();
+	if FAILED(result) {
+		SDelete(sound);
 		assert(0);
 		return;
 	}
+}
 
-	result = pSourceVoice->Start();
+void Audio::PauseWave(Sound* sound)
+{
+	HRESULT result;
+
+	result = sound->pSource->Stop();
 	if FAILED(result) {
-		delete[] sound->pBuffer;
+		SDelete(sound);
 		assert(0);
 		return;
 	}
+}
+
+void Audio::SetVolume(Sound* sound, const float volume)
+{
+	sound->pSource->SetVolume(volume);
 }

@@ -24,6 +24,8 @@ void WatashiEngine::Initialize()
 		Light* light = Light::Create(dx12->GetDevice());
 		ParticleManager::Create(dx12->GetDevice(), camera);
 	}
+
+	Audio::GetInstance()->Initialize();
 }
 
 bool WatashiEngine::ScreenClear(Color clearColor)

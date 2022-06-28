@@ -3,6 +3,8 @@
 #include <xaudio2.h>
 #include <wrl.h>
 
+#include "Singleton.h"
+
 /// <summary>
 /// オーディオコールバック
 /// </summary>
@@ -31,20 +33,28 @@ public:
 
 //サウンド
 struct Sound {
-	WAVEFORMATEX wfex{};//波形フォーマット
-	char* pBuffer;//波形データ
-	int size; //サイズ
+	WAVEFORMATEX wfex{};
+	XAUDIO2_BUFFER buf{};
+	IXAudio2SourceVoice* pSource = nullptr;
+
+	~Sound() {
+		if (pSource) {
+			pSource->DestroyVoice();
+		}
+	}
 };
 
-///<summary>
-///オーディオ
-///</summary>
-class Audio
+/// <summary>
+/// オーディオ
+/// </summary>
+class Audio : public Singleton_Unique<Audio>
 {
-private: //エイリアス
+private:
+	friend Singleton_Unique<Audio>;
+	Audio() = default;
 	//Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-public: //サブクラス
+public:
 	//チャンクヘッダ
 	struct Chunk
 	{
@@ -52,21 +62,21 @@ public: //サブクラス
 		int		size;  //チャンクサイズ
 	};
 
-	//RIFFヘッダチャンク
+	// RIFFヘッダチャンク
 	struct RiffHeader
 	{
 		Chunk	chunk;   //"RIFF"
 		char	type[4]; //"WAVE"
 	};
 
-	// FMTチャンク
+	//FMTチャンク
 	struct FormatChunk
 	{
 		Chunk		chunk; //"fmt "
 		WAVEFORMAT	fmt;   //波形フォーマット
 	};
 
-public: // メンバ関数
+public:
 
 	/// <summary>
 	/// 初期化
@@ -74,14 +84,18 @@ public: // メンバ関数
 	/// <returns>成否</returns>
 	bool Initialize();
 
-	bool LordSound(Sound* sound, const char* filename);
+	//サウンドファイル読み込み
+	Sound* LoadWave(const char* filename);
 
-	// サウンドファイルの読み込みと再生
-	void PlayWave(Sound* sound);
+	//サウンドファイル再生
+	void PlayWave(Sound* sound, bool loopFlag = false);
+	//サウンド停止
+	void PauseWave(Sound* sound);
+	//音量
+	void SetVolume(Sound* sound, const float volume);
 
-private: // メンバ変数
+private:
 	ComPtr<IXAudio2> xAudio2;
-	IXAudio2MasteringVoice* masterVoice;
+	IXAudio2MasteringVoice* masterVoice = nullptr;
 	XAudio2VoiceCallback voiceCallback;
-	Sound* sound = nullptr;
 };
